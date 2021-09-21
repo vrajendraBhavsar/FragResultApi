@@ -1,10 +1,7 @@
 package com.example.fragresultapi.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.view.postDelayed
 import com.example.fragresultapi.R
@@ -19,7 +16,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
 
         // First, get the resultKey from the caller.
         val requestKey = arguments?.getString(EXTRA_RESULT_KEY, null)
-        if (requestKey.isNullOrEmpty()){
+        if (requestKey.isNullOrEmpty()) {
             dismiss()
             return
         }
@@ -31,7 +28,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
 
             if (userName == password) {
                 binding.btnAuth.text = resources.getText(R.string.verifying)
-                view.postDelayed(1500){
+                view.postDelayed(1500) {
                     childFragmentManager.setFragmentResult(requestKey, Bundle().apply {
                         putString(RESULT_AUTH_USER, userName)
                     })
@@ -41,11 +38,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
         }
     }
 
-//    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-//        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_auth_dialog, container, false)
-//    }
-    companion object{
+    companion object {
         const val EXTRA_RESULT_KEY = "extra_result_key"
         const val RESULT_AUTH_USER = "result_auth_user"
     }
