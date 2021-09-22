@@ -6,4 +6,6 @@
     <string name="verifying">Verifying...</string>
     <string name="master_button">Master Button</string>
     <string name="master_text">master text</string>
+    <string name="verification_page">Verification Page</string>
+    <string name="username_here">username here</string>
 </resources>

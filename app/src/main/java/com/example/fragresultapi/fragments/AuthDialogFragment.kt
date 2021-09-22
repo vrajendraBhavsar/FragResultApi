@@ -1,21 +1,29 @@
 package com.example.fragresultapi.fragments
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDialogFragment
 import androidx.core.view.postDelayed
+import androidx.fragment.app.setFragmentResult
 import com.example.fragresultapi.R
 import com.example.fragresultapi.databinding.FragmentAuthDialogBinding
 
 class AuthDialogFragment : AppCompatDialogFragment() {
     lateinit var binding: FragmentAuthDialogBinding
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        return inflater.inflate(R.layout.fragment_auth_dialog, container, false)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAuthDialogBinding.bind(view)    //fragment ViewBinding
 
         // First, get the resultKey from the caller.
-        val requestKey = arguments?.getString(EXTRA_RESULT_KEY, null)
+        val requestKey = arguments?.getString(REQUEST_KEY, null)
         if (requestKey.isNullOrEmpty()) {
             dismiss()
             return
@@ -29,17 +37,19 @@ class AuthDialogFragment : AppCompatDialogFragment() {
             if (userName == password) {
                 binding.btnAuth.text = resources.getText(R.string.verifying)
                 view.postDelayed(1500) {
-                    childFragmentManager.setFragmentResult(requestKey, Bundle().apply {
-                        putString(RESULT_AUTH_USER, userName)
+                    setFragmentResult(requestKey, Bundle().apply {
+                        putString(DATA_KEY, userName)
                     })
-                    dismiss()
+                    dismiss()   //closed the dialog
                 }
+            }else{
+                Toast.makeText(requireContext(), "Creds doesn't match", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     companion object {
-        const val EXTRA_RESULT_KEY = "extra_result_key"
-        const val RESULT_AUTH_USER = "result_auth_user"
+        const val REQUEST_KEY = "request_key"
+        const val DATA_KEY = "data_key"
     }
 }

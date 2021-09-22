@@ -1,7 +1,7 @@
 package com.example.fragresultapi
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.example.fragresultapi.databinding.ActivityMainBinding
 import com.example.fragresultapi.fragments.MasterFragment
 
@@ -13,6 +13,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().add(MasterFragment::class.java, "")
+        if (savedInstanceState == null) {
+            supportFragmentManager
+                .beginTransaction()
+                .add(binding.container.id, MasterFragment(),"dialog")
+                .commit()
+        }
     }
 }
