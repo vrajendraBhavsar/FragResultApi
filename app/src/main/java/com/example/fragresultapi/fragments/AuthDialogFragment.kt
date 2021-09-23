@@ -15,6 +15,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
     lateinit var binding: FragmentAuthDialogBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding.btnAuth.text = resources.getQuantityText(R.plurals.verify,1)   //1 - to Choose 1st item from Plural String
         return inflater.inflate(R.layout.fragment_auth_dialog, container, false)
     }
 
@@ -35,8 +36,13 @@ class AuthDialogFragment : AppCompatDialogFragment() {
             val password = binding.etPassword.text.toString()
 
             if (userName == password) {
-                binding.btnAuth.text = resources.getText(R.string.verifying)
+                binding.btnAuth.text = resources.getQuantityText(R.plurals.verify, 2)   //2 is to pick 2nd item from Plural String
                 view.postDelayed(1500) {
+                    //1
+//                    val bundle: Bundle = Bundle()
+//                    bundle.putString(DATA_KEY, userName)
+//                    setFragmentResult(requestKey, bundle)
+                    //2
                     setFragmentResult(requestKey, Bundle().apply {
                         putString(DATA_KEY, userName)
                     })
