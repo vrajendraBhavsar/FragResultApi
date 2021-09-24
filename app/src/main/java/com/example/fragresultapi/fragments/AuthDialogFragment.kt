@@ -24,6 +24,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
         binding = FragmentAuthDialogBinding.bind(view)    //fragment ViewBinding
         // First, get the resultKey from the caller.
         val requestKey = arguments?.getString(REQUEST_KEY, null)
+
         if (requestKey.isNullOrEmpty()) {
             dismiss()
             return
