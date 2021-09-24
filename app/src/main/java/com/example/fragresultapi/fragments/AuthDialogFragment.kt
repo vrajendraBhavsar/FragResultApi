@@ -38,6 +38,7 @@ class AuthDialogFragment : AppCompatDialogFragment() {
             if (userName == password) {
                 binding.btnAuth.text = resources.getQuantityText(R.plurals.verify, 2)   //2 is to pick 2nd item from Plural String
                 view.postDelayed(1500) {
+                    //
                     //1
 //                    val bundle: Bundle = Bundle()
 //                    bundle.putString(DATA_KEY, userName)
